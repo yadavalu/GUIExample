@@ -1,58 +1,19 @@
-from PyQt6.QtWidgets import (
-    QApplication,
-    QCheckBox,
-    QComboBox,
-    QDateEdit,
-    QDateTimeEdit,
-    QDial,
-    QDoubleSpinBox,
-    QFontComboBox,
-    QLabel,
-    QLCDNumber,
-    QLineEdit,
-    QMainWindow,
-    QProgressBar,
-    QPushButton,
-    QRadioButton,
-    QSlider,
-    QSpinBox,
-    QTimeEdit,
-    QVBoxLayout,
-    QWidget,
-)
+from PyQt6.QtWidgets import QDialog, QWidget, QPushButton, QStackedWidget
 
 
-class MainWindow(QMainWindow):
-    def __init__(self):
+class MainWindow(QDialog):
+    def __init__(self, widget: QStackedWidget):
+        super().__init__()
+        
+        self.widget = widget
+        self.button = QPushButton("To Screen 2", self)
+        self.button.clicked.connect(lambda *args: self.widget.setCurrentIndex(self.widget.currentIndex() + 1))
+
+
+class Screen2(QDialog):
+    def __init__(self, widget: QStackedWidget):
         super().__init__()
 
-        self.setWindowTitle("Hello, World!")
-
-        layout = QVBoxLayout()
-        widgets = [
-            QCheckBox,
-            QComboBox,
-            QDateEdit,
-            QDateTimeEdit,
-            QDial,
-            QDoubleSpinBox,
-            QFontComboBox,
-            QLCDNumber,
-            QLabel,
-            QLineEdit,
-            QProgressBar,
-            QPushButton,
-            QRadioButton,
-            QSlider,
-            QSpinBox,
-            QTimeEdit,
-        ]
-
-        for w in widgets:
-            layout.addWidget(w())
-
-        widget = QWidget()
-        widget.setLayout(layout)
-
-
-        self.setCentralWidget(widget)
+        self.widget = widget
+        self.button = QPushButton("To Screen 1", self)
+        self.button.clicked.connect(lambda *args: self.widget.setCurrentIndex(self.widget.currentIndex() - 1))
