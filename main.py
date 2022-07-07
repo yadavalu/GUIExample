@@ -3,6 +3,7 @@ import sys
 
 from mainwindow import MainWindow, Screen2
 
+
 app = QApplication(sys.argv)
 
 window = QStackedWidget()
@@ -13,4 +14,3 @@ window.addWidget(screen2)
 window.show()
 
 app.exec()
-
